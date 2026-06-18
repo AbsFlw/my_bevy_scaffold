@@ -171,6 +171,7 @@ if ! grep -q "^deps/$" .gitignore 2>/dev/null; then
 
 # Bevy source for CodeGraph indexing (embedded git repo)
 deps/
+.codegraph/
 EOF
   ok ".gitignore updated: deps/ excluded from git tracking"
 else
@@ -187,13 +188,12 @@ ok "CodeGraph initialized — indexing your code + Bevy together"
 
 info "Generating .mcp.json for pi..."
 
-# 使用绝对路径，这样 pi 从任何工作目录启动都能找到
 cat > .mcp.json << EOF
 {
   "mcpServers": {
     "codegraph-bevy": {
       "command": "codegraph",
-      "args": ["serve", "--mcp", "--path", "$PROJECT_DIR"],
+      "args": ["serve", "--mcp", "--path", "."],
       "directTools": true
     }
   }
@@ -210,7 +210,7 @@ cat > CONTEXT.md << CONTEXTEOF
 
 This project has a **CodeGraph** knowledge graph indexing both your game code and the Bevy engine source code.
 
-**CodeGraph index location:** \`$PROJECT_DIR/.codegraph/\`
+**CodeGraph index location:** \`./.codegraph/\`
 
 ## Available CodeGraph Tools
 
