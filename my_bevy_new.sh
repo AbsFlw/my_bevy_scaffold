@@ -5,7 +5,7 @@ set -euo pipefail
 # setup-bevy-codegraph.sh
 # 创建一个新的 Bevy 项目，同时为 pi AI agent 配置 CodeGraph 知识图谱
 #
-# 用法: ./setup-bevy-codegraph.sh <project-name>
+# 用法: ./setup-bevy-codegraph.sh
 #
 # 效果:
 #   <project-name>/
@@ -30,13 +30,12 @@ info()  { echo -e "${CYAN}⟹${NC} $1"; }
 ok()    { echo -e "${GREEN}✓${NC} $1"; }
 warn()  { echo -e "${YELLOW}⚠${NC} $1"; }
 
-if [ $# -lt 1 ]; then
-  echo "Usage: $0 <project-name>"
-  echo "Example: $0 my-bevy-game"
+read -p "Enter new project name: " PROJECT_NAME
+if [ -z "$PROJECT_NAME" ]; then
+  echo "Error: project name cannot be empty."
   exit 1
 fi
 
-PROJECT_NAME="$1"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(pwd)/$PROJECT_NAME"
 
