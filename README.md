@@ -1,6 +1,6 @@
 使用方式：
 ```
-bash <(curl -fsSL https://raw.githubusercontent.com/Clementinelee/my_bevy_scaffold/main/my_bevy_new.sh)  
+bash <(curl -fsSL https://raw.githubusercontent.com/AbsFlw/my_bevy_scaffold/main/my_bevy_new.sh)  
 ```
 
 功能如下：
