@@ -79,17 +79,11 @@ info "Querying latest Bevy release version from crates.io..."
 # 策略: 优先 cargo search，失败则 fallback 到 crates.io API，再失败则用已知版本
 LATEST_BEVY=""
 
+read -p "Enter bevy version: " LATEST_BEVY
 if [ -z "$LATEST_BEVY" ]; then
-  # fallback: cargo search
-  LATEST_BEVY=$(cargo search bevy --registry crates-io --limit 1 2>/dev/null | head -1 | sed -n 's/.*bevy = "\([^"]*\)".*/\1/p' || echo "")
+  echo "Error: bevy version cannot be empty."
+  exit 1
 fi
-
-if [ -z "$LATEST_BEVY" ]; then
-  LATEST_BEVY="0.18.1"
-  warn "Could not query crates.io, using known version v$LATEST_BEVY"
-fi
-
-ok "Latest Bevy release: ${BOLD}v$LATEST_BEVY${NC}"
 
 # ── 步骤3: 添加 Bevy 依赖 + dev/release 特性配置 ──────────
 
