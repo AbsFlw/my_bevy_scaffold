@@ -72,11 +72,7 @@ cargo new "$PROJECT_NAME"
 cd "$PROJECT_DIR"
 ok "Rust project created"
 
-# ── 步骤2: 查询最新 Bevy release 版本 ────────────────────────
-
-info "Querying latest Bevy release version from crates.io..."
-
-# 策略: 优先 cargo search，失败则 fallback 到 crates.io API，再失败则用已知版本
+# ── 步骤2: 配置Bevy 版本
 LATEST_BEVY=""
 
 read -p "Enter bevy version: " LATEST_BEVY
@@ -107,9 +103,12 @@ fast-dev = ["bevy/dynamic_linking"]
 [profile.dev.package."*"]
 opt-level = 3
 
+[profile.dev.package.wgpu-types]
+debug-assertions = false
+
 [profile.release]
 opt-level = 3
-lto = "fat"
+lto = "thin"
 codegen-units = 1
 strip = "debuginfo"
 EOF
